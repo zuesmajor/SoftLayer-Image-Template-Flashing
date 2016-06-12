@@ -1,2 +1,2 @@
 # Ansible for Db2onC
-// more information
+This project is to migrate Ruby script based db2onC deployment to Ansible using Cumulus framework
