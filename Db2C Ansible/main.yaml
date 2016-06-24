@@ -1,0 +1,7 @@
+---
+
+- name: Main caller
+  hosts: define
+  sudo: true
+  roles:
+   - db2ToAnsible

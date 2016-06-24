@@ -1,0 +1,13 @@
+--- 
+
+# Change what's inside the paranthesis
+# Variables for configure_cci
+
+ip: "Change me" # "10.191.x.x" example
+plan: "Change me"
+iqn: "Change me"
+username: "Change me"
+password: "Change me"
+targetip: "Change me"
+license: "Change me"
+ora: "Change me"

@@ -1,0 +1,7 @@
+---
+
+# Includes the files to get started
+- include: configure_cci.yaml
+
+# Extra packages to install
+- include: pkgsInstall.yaml
