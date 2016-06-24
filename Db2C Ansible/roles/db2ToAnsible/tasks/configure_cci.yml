@@ -29,7 +29,7 @@
       shell: ssh -i ~/.ssh/db2hosted-devops_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@{{ ip }} \"chmod 0744 /tmp/sqldb-db2-hosted-boot-new ;/tmp/sqldb-db2-hosted-boot-new >> /tmp/sqldb-db2-hosted-boot-new.out \"
 
     - name: setup kernel parameters
-    - shell: ssh -i ~/.ssh/db2hosted-devops_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@{{ ip }} \"chmod 0744 /tmp/sqldb-setup-CentOS-new ;/tmp/sqldb-setup-CentOS-new >> /tmp/sqldb-setup-CentOS-new.out \" 
+      shell: ssh -i ~/.ssh/db2hosted-devops_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@{{ ip }} \"chmod 0744 /tmp/sqldb-setup-CentOS-new ;/tmp/sqldb-setup-CentOS-new >> /tmp/sqldb-setup-CentOS-new.out \" 
 
     - name: setup the san disk
       shell: ssh -i ~/.ssh/db2hosted-devops_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@{{ ip }} \"chmod 0744 /tmp/sqldb-prepare-SAN-disks-new ;/tmp/sqldb-prepare-SAN-disks-new >> /tmp/sqldb-prepare-SAN-disks-new.out \" 
