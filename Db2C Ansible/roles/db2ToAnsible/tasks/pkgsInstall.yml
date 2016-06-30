@@ -1,9 +1,0 @@
----
-
-# This file initializes the installation of required packages
-
-- name: "Install pip if not installed"
-  shell: sudo easy_install pip
-
-- name: "Install Softlayer API via pip"
-  shell: pip install softlayer

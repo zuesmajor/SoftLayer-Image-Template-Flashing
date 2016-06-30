@@ -1,12 +1,14 @@
+#!/usr/bin/ruby
+
 require 'softlayer_api'
 require 'json'
 
 # Credentials to the API are read from a configuration file by default.
 # See https://github.com/softlayer/softlayer-ruby/blob/master/lib/softlayer/Config.rb#L11-L44
 
-
-$SL_API_USERNAME = "ryanpa_573505";
-$SL_API_KEY = "Change me";
+# global variables
+$SL_API_USERNAME = "ryanpa_573505"; # Change me 
+$SL_API_KEY = "kjlahsdfjkhashdfjklhjkasdfjkl2890340283094823"; # Change me
 
 client = SoftLayer::Client.new;
 
