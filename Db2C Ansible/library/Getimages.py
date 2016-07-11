@@ -1,10 +1,10 @@
 import SoftLayer
 from pprint import pprint as pp
 
-templateId = 12345
+# templateId = 12345 // might use for ordering
 
-client = SoftLayer.Client(username='ryanpa_571879', 
-	api_key='5b32d9133a1816e10c7f7fca837a055ba3a2676ef19956385d7f649b9211d01d')
+client = SoftLayer.Client(username='SL_account_name', 
+	api_key='SL_API_Key')
 
 mask = "mask[id,name,note]"
 imageTemplates = client['SoftLayer_Account'].getPrivateBlockDeviceTemplateGroups(mask=mask)
