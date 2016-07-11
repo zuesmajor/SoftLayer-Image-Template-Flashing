@@ -1,7 +1,9 @@
 ---
 
-# Includes the files to get started
-- include: configure_cci.yaml
-
-# Extra packages to install
-- include: pkgsInstall.yaml
+- name: Find and Flash new image
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Looking for Private Image
+    local_action:
+      module: ImageModule
