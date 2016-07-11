@@ -1,10 +1,10 @@
 import SoftLayer
 from pprint import pprint as pp
 
-templateId = 12345 # // might use for ordering
+templateId = 111111 # // might use for ordering
 
-client = SoftLayer.Client(username='user_name', 
-	api_key='API KEY')
+client = SoftLayer.Client(username='USER_NAME', 
+	api_key='API_KEY')
 
 mask = "mask[id,name,note]"
 imageTemplates = client['SoftLayer_Account'].getPrivateBlockDeviceTemplateGroups(mask=mask)
@@ -14,6 +14,9 @@ for template in imageTemplates:
         print("%s - %s - %s" % (template['id'], template['name'], template['note']))
     except KeyError:
         print("%s - %s - %s" % (template['id'], template['name'], 'None'))
+
+'''
+Creating a new order
 
 order = {
     'complexType': 'SoftLayer_Container_Product_Order_Virtual_Guest',
@@ -44,3 +47,4 @@ order = {
 
 result = client['SoftLayer_Product_Order'].verifyOrder(order)
 pp(result)
+'''
