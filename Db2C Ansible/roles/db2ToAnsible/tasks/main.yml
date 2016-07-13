@@ -1,9 +1,15 @@
 ---
 
-- name: Find and Flash new image
-  hosts: localhost
-  gather_facts: false
+- hosts: localhost
+  connection: localhost
+  vars_files:
+    - ../vars/main.yml
   tasks:
-  - name: Looking for Private Image
-    local_action:
-      module: ImageModule
+
+    - name: Making Sure Python is installed
+      yum: name=python
+
+    - name: Installing SoftLayer API
+      pip: name=softlayer
+
+      
