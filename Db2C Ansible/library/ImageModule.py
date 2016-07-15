@@ -46,7 +46,6 @@ config['_id'] = data['_id']
 
 def applyPrivateImage(module):
   hardwareService = Client['SoftLayer_Hardware_Server']
-  imageTemplateId = ' '
 
     # grab the name from the module to choose which private image to flash to the new procured VM
 
