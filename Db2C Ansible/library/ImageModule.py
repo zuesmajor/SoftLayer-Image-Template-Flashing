@@ -59,8 +59,8 @@ def applyPrivateImage(module):
     try:
       if template['id'] == imageTemplate:
         copiedImage = template # Grabs the image template to be used from the list on the SL account
-      except KeyError:
-        print("No Match")
+    except KeyError:
+      print("No Match")
 
 # Starting to grab the information to apply the imageTemplate to the customer instance
 # Grabs the _id from the diable order
