@@ -70,6 +70,22 @@ def applyPrivateImage(module):
   except SoftLayer.SoftLayer.APIError as e:
     print('failed to flash')
 
+def main():
+  module = AnsibleModule(
+    argument_spec=dict(
+      SLUsername=dict(),
+      SLApiKey=dict(),
+      imageTemplate=dict()
+    )
+  )
+
+module.exit_json(changed=changed, instances=json.loads(json.dumps(instance, default=lambda o: o.__dict__)))
+
+from ansible.module_utils.basic import *
+
+if __name__ == '__main__':
+  main()
+
 
   
   
