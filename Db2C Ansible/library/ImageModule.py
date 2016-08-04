@@ -26,6 +26,7 @@ options:
 
 try:
   import SoftLayer
+  import json
   from pprint import pprint as pp
 
 USER_NAME = module.params.get('SLUsername')
@@ -44,7 +45,7 @@ config['_id'] = data['_id']
 
 def applyPrivateImage(module):
 
-  hardwareService = Client['SoftLayer_Virtual_Guest']
+  virtualService = Client['SoftLayer_Virtual_Guest']
   image = dict()
 
   # grab the name from the module to choose which private image to flash to the new procured VM
@@ -67,7 +68,7 @@ def applyPrivateImage(module):
 # Grabs the _id from the diable order
 
   try:
-    reload = hardwareService.reloadOperatingSystem('FORCE', image, id=config['_id'])
+    reload = virtualService.reloadOperatingSystem('FORCE', image, id=config['_id'])
   except SoftLayer.SoftLayer.APIError as e:
     print('failed to flash')
 
