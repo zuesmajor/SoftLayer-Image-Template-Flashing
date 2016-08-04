@@ -1,7 +1,6 @@
 ---
-
 - hosts: localhost
-  connection: local
+  connection: localhost
   gather_facts: False
   roles:
     - db2ToAnsible

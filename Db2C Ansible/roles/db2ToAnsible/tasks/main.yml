@@ -1,8 +1,6 @@
 ---
-  - hosts: localhost
-    tasks:
-      - name: Provision
-        module: ImageModule
-        SLUsername: ryanpa_571879
-        SLApiKey: 5b32d9133a1816e10c7f7fca837a055ba3a2676ef19956385d7f649b9211d01d
-        imageTemplate: 1217779
+- name: User / API Setup then flash
+  ImageModule:
+    SLUsername: ryanpa_571879
+    SLApiKey: 5b32d9133a1816e10c7f7fca837a055ba3a2676ef19956385d7f649b9211d01d
+    imageTemplate: 1217779

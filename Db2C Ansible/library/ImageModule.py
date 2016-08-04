@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 DOCUMENTATION = '''
 
 ---
@@ -23,6 +25,15 @@ options:
 
 '''
 
+EXAMPLES = '''
+---
+- name: User / API Setup then flash
+  ImageModule:
+    SLUsername: ##
+    SLApiKey: ##
+    imageTemplate: ##
+'''
+
 
 try:
   import SoftLayer
@@ -43,7 +54,7 @@ config['_id'] = data['_id']
 
 
 
-def applyPrivateImage(module):
+def applyPrivateImage():
 
   virtualService = Client['SoftLayer_Virtual_Guest']
   image = dict()
@@ -85,8 +96,7 @@ module.exit_json(changed=changed, instances=json.loads(json.dumps(instance, defa
 
 from ansible.module_utils.basic import *
 
-if __name__ == '__main__':
-  main()
+applyPrivateImage()
 
 
   
