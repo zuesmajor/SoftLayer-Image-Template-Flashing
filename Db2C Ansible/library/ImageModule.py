@@ -40,8 +40,9 @@ try:
   import json
   from pprint import pprint as pp
 
-USER_NAME = module.params.get('SLUsername')
-API_KEY = module.params.get('SLApiKey')
+if(module.params.get('SLUsername') and module.params.get('SLApiKey')):
+  USER_NAME = module.params.get('SLUsername')
+  API_KEY = module.params.get('SLApiKey')
 
 client = SoftLayer.Client(username=USER_NAME, api_key=API_KEY)
 
@@ -86,9 +87,9 @@ def applyPrivateImage():
 def main():
   module = AnsibleModule(
     argument_spec=dict(
-      SLUsername=dict(),
-      SLApiKey=dict(),
-      imageTemplate=dict()
+      SLUsername=dict(required=True),
+      SLApiKey=dict(required=True),
+      imageTemplate=dict(required=True)
     )
   )
 
@@ -96,9 +97,7 @@ module.exit_json(changed=changed, instances=json.loads(json.dumps(instance, defa
 
 from ansible.module_utils.basic import *
 
-applyPrivateImage()
-
-
-  
+if __name__ == '__main__':
+  main()
   
 
