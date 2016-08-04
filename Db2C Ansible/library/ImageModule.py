@@ -28,14 +28,12 @@ try:
   import SoftLayer
   from pprint import pprint as pp
 
-username = module.params.get('SLUsername')
-apiKey = module.params.get('SLApiKey')
+USER_NAME = module.params.get('SLUsername')
+API_KEY = module.params.get('SLApiKey')
 
-client = SoftLayer.Client(username=username, api_key=apiKey)
+client = SoftLayer.Client(username=USER_NAME, api_key=API_KEY)
 
-config = {
-  _id: ''
-}
+config = dict()
 
 # Opens the json and grabs the _id in which is the customer instance
 with open('diabloFile.json') as data_file:
@@ -45,20 +43,23 @@ config['_id'] = data['_id']
 
 
 def applyPrivateImage(module):
-  hardwareService = Client['SoftLayer_Hardware_Server']
 
-    # grab the name from the module to choose which private image to flash to the new procured VM
+  hardwareService = Client['SoftLayer_Virtual_Guest']
+  image = dict()
 
-  if module.params.get('imageTemplate'):
-    imageTemplate = module.params.get('imageTemplate') # New variable the name of the input
+  # grab the name from the module to choose which private image to flash to the new procured VM
+
+  imageTemplate = module.params.get('imageTemplate') # New variable the name of the input
 
   mask = "mask[id,name,note]"
-  imageTemplates = client['SoftLayer_Account'].getPrivateBlockDeviceTemplateGroups(mask=mask)
+  privateImageList = client['SoftLayer_Account'].getPrivateBlockDeviceTemplateGroups(mask=mask)
 
-  for template in imageTemplates:
+
+# Grabs the image template to be used from the list on the SL account
+  for template in privateImageList:
     try:
-      if template['id'] == imageTemplate:
-        copiedImage = template # Grabs the image template to be used from the list on the SL account
+      if template['id'] == imageTemplateId:
+        image['imageTemplateId'] = imageTemplateId 
     except KeyError:
       print("No Match")
 
@@ -66,7 +67,7 @@ def applyPrivateImage(module):
 # Grabs the _id from the diable order
 
   try:
-    reload = hardwareService.reloadOperatingSystem('FORCE', config, id=config['_id'])
+    reload = hardwareService.reloadOperatingSystem('FORCE', image, id=config['_id'])
   except SoftLayer.SoftLayer.APIError as e:
     print('failed to flash')
 
