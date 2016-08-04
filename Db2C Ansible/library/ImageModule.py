@@ -22,6 +22,11 @@ options:
       - Image Template within the container to flash to customer
     required: true
     default: null
+  customerInstance:
+    description:
+      - Procured Customer instance
+    required: true
+    default: null
 
 '''
 
@@ -32,6 +37,7 @@ EXAMPLES = '''
     SLUsername: ##
     SLApiKey: ##
     imageTemplate: ##
+    customerInstance: ##
 '''
 
 
@@ -49,9 +55,7 @@ client = SoftLayer.Client(username=USER_NAME, api_key=API_KEY)
 config = dict()
 
 # Opens the json and grabs the _id in which is the customer instance
-with open('diabloFile.json') as data_file:
-  data = json.load(data_file)
-config['_id'] = data['_id']
+config['_idCustomer'] = module.params.get('customerInstance')
 
 
 
@@ -80,15 +84,15 @@ def applyPrivateImage():
 # Grabs the _id from the diable order
 
   try:
-    reload = virtualService.reloadOperatingSystem('FORCE', image, id=config['_id'])
+    reload = virtualService.reloadOperatingSystem('FORCE', image, id=config['_idCustomer'])
   except SoftLayer.SoftLayer.APIError as e:
     print('failed to flash')
 
 def main():
   module = AnsibleModule(
     argument_spec=dict(
-      SLUsername=dict(required=True),
-      SLApiKey=dict(required=True),
+      SLUsername=dict(required=True, type='str'),
+      SLApiKey=dict(required=True, type='str'),
       imageTemplate=dict(required=True)
     )
   )
