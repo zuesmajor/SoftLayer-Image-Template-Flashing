@@ -99,7 +99,7 @@ def main():
   applyPrivateImage(module.params.get('imageTemplate'), module.params.get('customerInstance'), 
     module.params.get('SLUsername'), module.params.get('SLApiKey'))
 
-  module.exit_json(changed=changed, instances=json.loads(json.dumps(instance, default=lambda o: o.__dict__)))
+  module.exit_json(instances=json.loads(json.dumps(default=lambda o: o.__dict__)))
 
 from ansible.module_utils.basic import *
 
