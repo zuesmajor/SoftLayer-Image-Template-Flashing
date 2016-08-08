@@ -46,11 +46,11 @@ try:
   import json
   from pprint import pprint as pp
 
-if(module.params.get('SLUsername') and module.params.get('SLApiKey')):
-  sl_username = module.params.get('SLUsername')
-  sl_apikey = module.params.get('SLApiKey')
+  if(module.params.get('SLUsername') and module.params.get('SLApiKey')):
+    sl_username = module.params.get('SLUsername')
+    sl_apikey = module.params.get('SLApiKey')
 
-client = SoftLayer.Client(username=sl_username, sl_apikey=sl_apikey)
+  client = SoftLayer.Client(username=sl_username, sl_apikey=sl_apikey)
 
 def applyPrivateImage():
 
