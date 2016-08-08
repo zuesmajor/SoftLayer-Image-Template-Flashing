@@ -41,29 +41,31 @@ EXAMPLES = '''
 '''
 
 
-try:
-  import SoftLayer
-  import json
-  from pprint import pprint as pp
 
-  if(module.params.get('SLUsername') and module.params.get('SLApiKey')):
-    sl_username = module.params.get('SLUsername')
-    sl_apikey = module.params.get('SLApiKey')
+import SoftLayer
+import json
+from pprint import pprint as pp
 
-  client = SoftLayer.Client(username=sl_username, sl_apikey=sl_apikey)
 
-def applyPrivateImage():
+def applyPrivateImage(imageTemplate, customerInstance, SLUsername, SLApiKey):
 
-  virtualService = Client['SoftLayer_Virtual_Guest']
+  try:
+    client = SoftLayer.Client(username=SLUsername, api_key=SLApiKey)
+    account = client['Account'].getObject()
+  except SoftLayer.SoftLayerAPIError as e:
+    print("unable to retrieve account")
+    exit(1)
+
+  virtualService = client['SoftLayer_Virtual_Guest']
   image = dict()
   config = dict()
 
   # Opens the json and grabs the _id in which is the customer instance
-  config['_idCustomer'] = module.params.get('customerInstance')
+  config['_idCustomer'] = customerInstance
 
   # grab the name from the module to choose which private image to flash to the new procured VM
 
-  imageTemplate = module.params.get('imageTemplate') # New variable the name of the input
+  # imageTemplate = imageTemplate.params.get('imageTemplate') # New variable the name of the input
 
   mask = "mask[id,name,note]"
   privateImageList = client['SoftLayer_Account'].getPrivateBlockDeviceTemplateGroups(mask=mask)
@@ -72,8 +74,8 @@ def applyPrivateImage():
 # Grabs the image template to be used from the list on the SL account
   for template in privateImageList:
     try:
-      if template['id'] == imageTemplateId:
-        image['imageTemplateId'] = imageTemplateId 
+      if template['id'] == imageTemplate:
+        image['imageTemplateId'] = imageTemplate 
     except KeyError:
       print("No Match")
 
@@ -88,13 +90,16 @@ def applyPrivateImage():
 def main():
   module = AnsibleModule(
     argument_spec=dict(
-      SLUsername=dict(required=True, type='str'),
-      SLApiKey=dict(required=True, type='str'),
-      imageTemplate=dict(required=True)
+      SLUsername=dict(required=True),
+      SLApiKey=dict(required=True),
+      imageTemplate=dict(required=True),
+      customerInstance=dict(required=True)
     )
   )
+  applyPrivateImage(module.params.get('imageTemplate'), module.params.get('customerInstance'), 
+    module.params.get('SLUsername'), module.params.get('SLApiKey'))
 
-module.exit_json(changed=changed, instances=json.loads(json.dumps(instance, default=lambda o: o.__dict__)))
+  module.exit_json(changed=changed, instances=json.loads(json.dumps(instance, default=lambda o: o.__dict__)))
 
 from ansible.module_utils.basic import *
 
