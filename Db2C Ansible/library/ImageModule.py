@@ -47,22 +47,19 @@ try:
   from pprint import pprint as pp
 
 if(module.params.get('SLUsername') and module.params.get('SLApiKey')):
-  USER_NAME = module.params.get('SLUsername')
-  API_KEY = module.params.get('SLApiKey')
+  sl_username = module.params.get('SLUsername')
+  sl_apikey = module.params.get('SLApiKey')
 
-client = SoftLayer.Client(username=USER_NAME, api_key=API_KEY)
-
-config = dict()
-
-# Opens the json and grabs the _id in which is the customer instance
-config['_idCustomer'] = module.params.get('customerInstance')
-
-
+client = SoftLayer.Client(username=sl_username, sl_apikey=sl_apikey)
 
 def applyPrivateImage():
 
   virtualService = Client['SoftLayer_Virtual_Guest']
   image = dict()
+  config = dict()
+
+  # Opens the json and grabs the _id in which is the customer instance
+  config['_idCustomer'] = module.params.get('customerInstance')
 
   # grab the name from the module to choose which private image to flash to the new procured VM
 
