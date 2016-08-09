@@ -40,12 +40,9 @@ EXAMPLES = '''
     customerInstance: ##
 '''
 
-
-
 import SoftLayer
 import json
 from pprint import pprint as pp
-
 
 def applyPrivateImage(imageTemplate, customerInstance, SLUsername, SLApiKey):
 
@@ -66,7 +63,6 @@ def applyPrivateImage(imageTemplate, customerInstance, SLUsername, SLApiKey):
   # grab the name from the module to choose which private image to flash to the new procured VM
   mask = "mask[id,name,note]"
   privateImageList = client['SoftLayer_Account'].getPrivateBlockDeviceTemplateGroups(mask=mask)
-
 
 # Grabs the image template to be used from the list on the SL account
   for template in privateImageList:
