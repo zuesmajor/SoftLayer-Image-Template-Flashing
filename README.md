@@ -31,8 +31,8 @@ $ vim db2onc-ansible/Db2C\ Ansible/roles/db2ToAnsible/tasks/main.yml
 ##### You'll want to edit the 4 values
 - SLUsername // Your SoftLayer Username
 - SLApiKey // Your SL APi Key
-- imageTemplate // Your private image template
-- customerInstance // Customer server 
+- imageTemplate // Your private image template ID
+- customerInstance // Customer server ID
 
 ##### Executing
 ```
