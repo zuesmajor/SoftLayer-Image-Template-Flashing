@@ -64,9 +64,6 @@ def applyPrivateImage(imageTemplate, customerInstance, SLUsername, SLApiKey):
   config['_idCustomer'] = customerInstance
 
   # grab the name from the module to choose which private image to flash to the new procured VM
-
-  # imageTemplate = imageTemplate.params.get('imageTemplate') # New variable the name of the input
-
   mask = "mask[id,name,note]"
   privateImageList = client['SoftLayer_Account'].getPrivateBlockDeviceTemplateGroups(mask=mask)
 
@@ -80,8 +77,6 @@ def applyPrivateImage(imageTemplate, customerInstance, SLUsername, SLApiKey):
       print("No Match")
 
 # Starting to grab the information to apply the imageTemplate to the customer instance
-# Grabs the _id from the diable order
-
   try:
     reload = virtualService.reloadOperatingSystem('FORCE', image, id=config['_idCustomer'])
   except SoftLayer.SoftLayer.APIError as e:
