@@ -16,6 +16,13 @@ $ pip install softlayer
 $ sudo pip install ansible
 or via brew -> brew install ansible
 ```
+
+## Installation Linux (Redhat *nix)
+```
+$ sudo yum install ansible
+$ pip install softlayer
+```
+
 ## Testing Examples
 ##### Information to Change:
 ```
