@@ -1,5 +1,4 @@
 # Image Template Flashing Using Ansible
-# =================================
 
 ## Description
 Ansible role in which you'll be able to grab a private image template located within your softlayer account and reload this image template onto a VM within your account. 
